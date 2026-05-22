@@ -64,13 +64,38 @@ export default function DebateArena() {
   
   const [isServerConnected, setIsServerConnected] = useState(false);
   const pageSocketRef = useRef<WebSocket | null>(null);
+  const audioObjRef = useRef<HTMLAudioElement | null>(null); // Ссылка на текущее аудио
 
-  const playAudioB64 = (base64String: string) => {
-    if (!base64String) return;
+  const stopCurrentAudio = () => {
+    if (audioObjRef.current) {
+      audioObjRef.current.pause();
+      audioObjRef.current.currentTime = 0;
+      audioObjRef.current = null;
+    }
+  };
+
+  const playAudioB64 = (base64String: string, onEndCallback?: () => void) => {
+    if (!base64String) {
+       if (onEndCallback) onEndCallback();
+       return;
+    }
     try {
+      stopCurrentAudio(); // Останавливаем предыдущее, если было
       const audio = new Audio(`data:audio/mpeg;base64,${base64String}`);
-      audio.play();
-    } catch (e) { console.error(e); }
+      audioObjRef.current = audio;
+      
+      if (onEndCallback) {
+          audio.onended = onEndCallback;
+      }
+      
+      audio.play().catch(e => {
+          console.error("Автовоспроизведение заблокировано браузером", e);
+          if (onEndCallback) onEndCallback();
+      });
+    } catch (e) { 
+        console.error(e); 
+        if (onEndCallback) onEndCallback();
+    }
   };
 
   useEffect(() => {
@@ -89,15 +114,26 @@ export default function DebateArena() {
       socket.onmessage = (event) => {
         try {
           const data = JSON.parse(event.data);
-          setModeratorText(data.text);
+          
+          if (data.text) setModeratorText(data.text);
           if (data.transcript) setLastTranscript(data.transcript);
           if (data.scoreA !== undefined) setScoreA(data.scoreA);
           if (data.scoreB !== undefined) setScoreB(data.scoreB);
-          if (data.audio) playAudioB64(data.audio);
           
           if (data.event === "INTRO_COMPLETE") {
-            setTimeout(() => setPhase('PREP_TIME'), 10000);
+             // Проигрываем аудио интро и ТОЛЬКО после его окончания переходим к подготовке
+             if (data.audio) {
+                 playAudioB64(data.audio, () => {
+                     // Этот код сработает, когда ведущая закончит говорить
+                     setPhase(prev => prev === 'INTRO' ? 'PREP_TIME' : prev); // Проверка, не скипнули ли мы уже
+                 });
+             } else {
+                 setPhase('PREP_TIME');
+             }
+          } else if (data.audio) {
+             playAudioB64(data.audio);
           }
+          
         } catch (e) { console.error(e); }
       };
       
@@ -119,6 +155,7 @@ export default function DebateArena() {
         socket.onclose = null;
         socket.close();
       }
+      stopCurrentAudio();
     };
   }, []);
 
@@ -136,10 +173,10 @@ export default function DebateArena() {
   const handleServerResponse = (rawData: string) => {
     try {
       const data = JSON.parse(rawData);
-      setModeratorText(data.text);
-      setLastTranscript(data.transcript); 
-      setScoreA(data.scoreA);
-      setScoreB(data.scoreB);
+      if (data.text) setModeratorText(data.text);
+      if (data.transcript) setLastTranscript(data.transcript); 
+      if (data.scoreA !== undefined) setScoreA(data.scoreA);
+      if (data.scoreB !== undefined) setScoreB(data.scoreB);
       if (data.audio) playAudioB64(data.audio);
     } catch (e) {}
   };
@@ -149,6 +186,7 @@ export default function DebateArena() {
   const handleStartGame = () => {
     if (!selectedTheme) return;
     setPhase('INTRO');
+    setPrepTimeLeft(60); // Сбрасываем таймер для новой игры
     setModeratorText(`📺 Ведущая готовится к эфиру...`);
     
     if (pageSocketRef.current && pageSocketRef.current.readyState === WebSocket.OPEN) {
@@ -158,6 +196,12 @@ export default function DebateArena() {
       setModeratorText("⚠️ Ошибка: Нет стабильного подключения к серверу. Подождите пару секунд и попробуйте снова.");
       setTimeout(() => setPhase('TOPIC_SELECTION'), 3000);
     }
+  };
+
+  // Функции для ручного пропуска фаз
+  const skipIntro = () => {
+    stopCurrentAudio(); // Глушим ведущую
+    setPhase('PREP_TIME');
   };
 
   const skipPrep = () => {
@@ -247,7 +291,11 @@ export default function DebateArena() {
         {phase === 'INTRO' && (
           <div className="w-full flex flex-col items-center justify-center animate-pulse">
             <h2 className="text-4xl font-black text-white mb-4">В эфире...</h2>
-            <p className="text-xl text-slate-300">{moderatorText}</p>
+            <p className="text-xl text-slate-300 mb-8 max-w-2xl">{moderatorText}</p>
+            {/* Кнопка пропуска интро */}
+            <button onClick={skipIntro} className="px-6 py-2 border border-white/20 text-white/50 rounded-full hover:text-white hover:border-white transition-all text-sm">
+              Пропустить вступление ➔
+            </button>
           </div>
         )}
 
@@ -258,7 +306,9 @@ export default function DebateArena() {
               00:{prepTimeLeft.toString().padStart(2, '0')}
             </div>
             <p className="text-slate-400 mb-8 max-w-lg">Обсудите стратегию и подготовьте первый аргумент. Микрофоны сейчас отключены.</p>
-            <button onClick={skipPrep} className="px-8 py-3 border border-white/20 text-white/50 rounded-full hover:text-white hover:border-white transition-all">Пропустить ожидание (Готовы)</button>
+            <button onClick={skipPrep} className="px-8 py-3 border border-white/20 text-white/50 rounded-full hover:text-white hover:border-white transition-all">
+               К дебатам (Команды готовы) ➔
+            </button>
           </div>
         )}
 
