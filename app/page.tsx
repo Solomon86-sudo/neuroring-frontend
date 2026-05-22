@@ -11,8 +11,16 @@ const TOPICS_CATALOG = [
     style: "border-amber-500/30 text-amber-400 bg-amber-950/20 hover:bg-amber-950/40",
     activeStyle: "border-amber-400 bg-amber-500/20 text-amber-200 scale-105 shadow-[0_0_15px_rgba(245,158,11,0.3)]",
     themes: [
-      "Роль личности в истории: создают ли великие люди эпохи или эпохи создают их?",
-      "Была ли неизбежна Первая мировая война или это цепь трагических ошибок?",
+      {
+        title: "Роль личности в истории: создают ли великие люди эпохи или эпохи создают их?",
+        pro: ["Лидеры меняют ход событий силой воли и интеллекта.", "Без конкретных исторических фигур многие реформы и революции не состоялись бы."],
+        con: ["Личности — лишь продукт социокультурных и экономических условий своего времени.", "Исторические процессы объективны и развивались бы схожим образом при других лидерах."]
+      },
+      {
+        title: "Была ли неизбежна Первая мировая война или это цепь трагических ошибок?",
+        pro: ["Накопившиеся противоречия и гонка вооружений делали конфликт неизбежным.", "Система альянсов создала эффект домино, который нельзя было остановить."],
+        con: ["Дипломатические ошибки и амбиции конкретных правителей стали катализатором.", "При более грамотной дипломатии локальный конфликт на Балканах можно было погасить."]
+      }
     ]
   },
   {
@@ -20,8 +28,16 @@ const TOPICS_CATALOG = [
     style: "border-purple-500/30 text-purple-400 bg-purple-950/20 hover:bg-purple-950/40",
     activeStyle: "border-purple-400 bg-purple-500/20 text-purple-200 scale-105 shadow-[0_0_15px_rgba(168,85,247,0.3)]",
     themes: [
-      "Существует ли подлинная свобода воли, или каждый наш шаг тотально предопределен?",
-      "Технологический прогресс: величайшее благо для разума или путь к катастрофе?",
+      {
+        title: "Существует ли подлинная свобода воли, или каждый наш шаг тотально предопределен?",
+        pro: ["Человек осознает выбор и способен действовать вопреки инстинктам.", "Моральная ответственность невозможна без свободы воли."],
+        con: ["Наш выбор — результат генетики, воспитания и биохимии мозга.", "Концепция свободы воли — это иллюзия, созданная эволюцией для социализации."]
+      },
+      {
+        title: "Технологический прогресс: величайшее благо для разума или путь к катастрофе?",
+        pro: ["Технологии избавляют от болезней, голода и тяжелого труда, продлевая жизнь.", "Они расширяют когнитивные возможности и объединяют человечество."],
+        con: ["Прогресс ведет к отчуждению, потере смыслов и разрушению экологии.", "Риски бесконтрольного ИИ и биотехнологий перевешивают потенциальную пользу."]
+      }
     ]
   },
   {
@@ -29,8 +45,16 @@ const TOPICS_CATALOG = [
     style: "border-emerald-500/30 text-emerald-400 bg-emerald-950/20 hover:bg-emerald-950/40",
     activeStyle: "border-emerald-400 bg-emerald-500/20 text-emerald-200 scale-105 shadow-[0_0_15px_rgba(16,185,129,0.3)]",
     themes: [
-      "Любовь с первого взгляда — это химия мозга или глубокое узнавание?",
-      "Социальные сети: инструмент сближения или причина тотального одиночества?",
+      {
+        title: "Любовь с первого взгляда — это химия мозга или глубокое узнавание?",
+        pro: ["Это биологический механизм быстрого поиска подходящего партнера для размножения.", "Ощущение 'узнавания' — это всплеск дофамина и окситоцина."],
+        con: ["Это бессознательное совпадение сложных психологических паттернов и травм.", "Химия — лишь следствие глубокого внутреннего резонанса."]
+      },
+      {
+        title: "Социальные сети: инструмент сближения или причина тотального одиночества?",
+        pro: ["Стирают границы, позволяя находить единомышленников в любой точке мира.", "Дают голос маргинализованным группам и помогают поддерживать связи."],
+        con: ["Создают иллюзию общения, заменяя глубокие связи суррогатами (лайками).", "Стимулируют сравнение себя с нереалистичными образами, повышая тревожность."]
+      }
     ]
   },
   {
@@ -38,13 +62,22 @@ const TOPICS_CATALOG = [
     style: "border-rose-500/30 text-rose-400 bg-rose-950/20 hover:bg-rose-950/40",
     activeStyle: "border-rose-400 bg-rose-500/20 text-rose-200 scale-105 shadow-[0_0_15px_rgba(244,63,94,0.3)]",
     themes: [
-      "Авторское кино против блокбастеров: убьют ли кассовые сборы искусство?",
-      "Финал истории: делает ли фильм шедевром только открытый финал?",
+      {
+        title: "Авторское кино против блокбастеров: убьют ли кассовые сборы искусство?",
+        pro: ["Студии боятся рисковать, вкладывая деньги только во франшизы и ремейки.", "Сложные, глубокие фильмы вытесняются из кинотеатров аттракционами."],
+        con: ["Блокбастеры спонсируют индустрию, позволяя студиям иногда финансировать и артхаус.", "Разделение на жанры существовало всегда, искусство найдет свою нишу на стримингах."]
+      },
+      {
+        title: "Финал истории: делает ли фильм шедевром только открытый финал?",
+        pro: ["Открытый финал вовлекает зрителя в сотворчество, заставляя думать после титров.", "Однозначный конец часто обесценивает сложность поднятых в фильме проблем."],
+        con: ["Хорошо прописанный, логичный финал требует большего мастерства от сценариста.", "Зритель имеет право на катарсис и завершенность истории, а не на многоточие."]
+      }
     ]
   }
 ];
 
 type GamePhase = 'REGISTRATION' | 'TOPIC_SELECTION' | 'INTRO' | 'PREP_TIME' | 'DEBATE';
+type ThemeData = { title: string, pro: string[], con: string[] };
 
 export default function DebateArena() {
   const [phase, setPhase] = useState<GamePhase>('REGISTRATION');
@@ -54,7 +87,7 @@ export default function DebateArena() {
   });
   
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
-  const [selectedTheme, setSelectedTheme] = useState<string | null>(null);
+  const [selectedTheme, setSelectedTheme] = useState<ThemeData | null>(null);
   const [prepTimeLeft, setPrepTimeLeft] = useState(60);
 
   const [moderatorText, setModeratorText] = useState("");
@@ -64,7 +97,7 @@ export default function DebateArena() {
   
   const [isServerConnected, setIsServerConnected] = useState(false);
   const pageSocketRef = useRef<WebSocket | null>(null);
-  const audioObjRef = useRef<HTMLAudioElement | null>(null); // Ссылка на текущее аудио
+  const audioObjRef = useRef<HTMLAudioElement | null>(null);
 
   const stopCurrentAudio = () => {
     if (audioObjRef.current) {
@@ -80,7 +113,7 @@ export default function DebateArena() {
        return;
     }
     try {
-      stopCurrentAudio(); // Останавливаем предыдущее, если было
+      stopCurrentAudio();
       const audio = new Audio(`data:audio/mpeg;base64,${base64String}`);
       audioObjRef.current = audio;
       
@@ -121,11 +154,9 @@ export default function DebateArena() {
           if (data.scoreB !== undefined) setScoreB(data.scoreB);
           
           if (data.event === "INTRO_COMPLETE") {
-             // Проигрываем аудио интро и ТОЛЬКО после его окончания переходим к подготовке
              if (data.audio) {
                  playAudioB64(data.audio, () => {
-                     // Этот код сработает, когда ведущая закончит говорить
-                     setPhase(prev => prev === 'INTRO' ? 'PREP_TIME' : prev); // Проверка, не скипнули ли мы уже
+                     setPhase(prev => prev === 'INTRO' ? 'PREP_TIME' : prev);
                  });
              } else {
                  setPhase('PREP_TIME');
@@ -186,11 +217,12 @@ export default function DebateArena() {
   const handleStartGame = () => {
     if (!selectedTheme) return;
     setPhase('INTRO');
-    setPrepTimeLeft(60); // Сбрасываем таймер для новой игры
+    setPrepTimeLeft(60);
     setModeratorText(`📺 Ведущая готовится к эфиру...`);
     
     if (pageSocketRef.current && pageSocketRef.current.readyState === WebSocket.OPEN) {
-      const gameConfig = { theme: selectedTheme, profiles: profiles };
+      // Отправляем на сервер заголовок темы
+      const gameConfig = { theme: selectedTheme.title, profiles: profiles };
       pageSocketRef.current.send(`START_GAME:${JSON.stringify(gameConfig)}`);
     } else {
       setModeratorText("⚠️ Ошибка: Нет стабильного подключения к серверу. Подождите пару секунд и попробуйте снова.");
@@ -198,9 +230,8 @@ export default function DebateArena() {
     }
   };
 
-  // Функции для ручного пропуска фаз
   const skipIntro = () => {
-    stopCurrentAudio(); // Глушим ведущую
+    stopCurrentAudio();
     setPhase('PREP_TIME');
   };
 
@@ -213,7 +244,7 @@ export default function DebateArena() {
   return (
     <div className="min-h-screen bg-slate-950 text-white flex flex-col items-center justify-between p-4 md:p-8 font-sans relative">
       
-      {/* ИНДИКАТОР ПОДКЛЮЧЕНИЯ К СЕРВЕРУ */}
+      {/* ИНДИКАТОР ПОДКЛЮЧЕНИЯ */}
       <div className="absolute top-4 left-4 flex items-center gap-2 bg-slate-900/80 px-3 py-1.5 rounded-full border border-white/5 text-xs text-slate-400 z-50">
         <span className={`w-2 h-2 rounded-full ${isServerConnected ? 'bg-emerald-500 animate-pulse' : 'bg-rose-500'}`} />
         {isServerConnected ? 'Облако: Подключено' : 'Облако: Поиск сети...'}
@@ -227,12 +258,11 @@ export default function DebateArena() {
 
       <div className="flex-1 w-full max-w-5xl flex flex-col items-center justify-center border border-white/10 rounded-[30px] bg-slate-900/50 backdrop-blur-xl p-6 md:p-12 text-center shadow-2xl relative min-h-[400px] my-4">
         
+        {/* ФАЗА: РЕГИСТРАЦИЯ */}
         {phase === 'REGISTRATION' && (
           <div className="w-full flex flex-col items-center">
             <h2 className="text-2xl md:text-3xl font-black mb-8 text-white uppercase tracking-wider">Регистрация участников</h2>
             <div className="flex flex-col md:flex-row gap-8 w-full max-w-3xl">
-              
-              {/* Профиль А */}
               <div className="flex-1 p-6 border border-cyan-500/30 bg-cyan-950/20 rounded-2xl">
                 <h3 className="text-xl font-bold text-cyan-400 mb-4">Команда А (ЗА)</h3>
                 <div className="flex flex-col gap-4">
@@ -248,7 +278,6 @@ export default function DebateArena() {
                 </div>
               </div>
 
-              {/* Профиль Б */}
               <div className="flex-1 p-6 border border-fuchsia-500/30 bg-fuchsia-950/20 rounded-2xl">
                 <h3 className="text-xl font-bold text-fuchsia-400 mb-4">Команда Б (ПРОТИВ)</h3>
                 <div className="flex flex-col gap-4">
@@ -263,12 +292,12 @@ export default function DebateArena() {
                   </label>
                 </div>
               </div>
-
             </div>
             <button onClick={submitRegistration} className="mt-8 px-12 py-4 bg-white text-black font-black rounded-full hover:scale-105 transition-all shadow-xl uppercase">Перейти к выбору темы ➔</button>
           </div>
         )}
 
+        {/* ФАЗА: ВЫБОР ТЕМЫ */}
         {phase === 'TOPIC_SELECTION' && (
           <div className="w-full flex flex-col items-center">
              <h2 className="text-2xl md:text-3xl font-black mb-8 bg-gradient-to-r from-cyan-400 to-fuchsia-400 bg-clip-text text-transparent uppercase tracking-wider">Выбор дисциплины баттла</h2>
@@ -279,8 +308,8 @@ export default function DebateArena() {
             </div>
             {activeCategoryId && (
               <div className="w-full flex flex-col gap-3 mb-8 text-left">
-                {TOPICS_CATALOG.find(c => c.id === activeCategoryId)?.themes.map((theme, i) => (
-                  <button key={i} onClick={() => setSelectedTheme(theme)} className={`p-4 rounded-xl border transition-all ${selectedTheme === theme ? 'border-cyan-500 bg-cyan-500/10 text-cyan-200 font-medium' : 'border-white/5 bg-slate-900/40 text-slate-300'}`}>{theme}</button>
+                {TOPICS_CATALOG.find(c => c.id === activeCategoryId)?.themes.map((themeObj, i) => (
+                  <button key={i} onClick={() => setSelectedTheme(themeObj)} className={`p-4 rounded-xl border transition-all ${selectedTheme?.title === themeObj.title ? 'border-cyan-500 bg-cyan-500/10 text-cyan-200 font-medium' : 'border-white/5 bg-slate-900/40 text-slate-300'}`}>{themeObj.title}</button>
                 ))}
               </div>
             )}
@@ -288,33 +317,64 @@ export default function DebateArena() {
           </div>
         )}
 
+        {/* ФАЗА: ВСТУПЛЕНИЕ */}
         {phase === 'INTRO' && (
           <div className="w-full flex flex-col items-center justify-center animate-pulse">
             <h2 className="text-4xl font-black text-white mb-4">В эфире...</h2>
             <p className="text-xl text-slate-300 mb-8 max-w-2xl">{moderatorText}</p>
-            {/* Кнопка пропуска интро */}
             <button onClick={skipIntro} className="px-6 py-2 border border-white/20 text-white/50 rounded-full hover:text-white hover:border-white transition-all text-sm">
               Пропустить вступление ➔
             </button>
           </div>
         )}
 
+        {/* ФАЗА: ПОДГОТОВКА (ОТКРЫТЫЕ ТЕЗИСЫ И ТАЙМЕР) */}
         {phase === 'PREP_TIME' && (
           <div className="w-full flex flex-col items-center">
-            <h2 className="text-2xl font-bold text-amber-400 mb-6 uppercase tracking-widest">Внутреннее обсуждение команд</h2>
-            <div className="text-8xl font-mono font-black text-white mb-8 bg-slate-950 p-8 rounded-3xl border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+            <h2 className="text-2xl font-bold text-amber-400 mb-4 uppercase tracking-widest">Минута на подготовку</h2>
+            
+            <div className="text-6xl md:text-8xl font-mono font-black text-white mb-6 bg-slate-950 px-8 py-4 rounded-3xl border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
               00:{prepTimeLeft.toString().padStart(2, '0')}
             </div>
-            <p className="text-slate-400 mb-8 max-w-lg">Обсудите стратегию и подготовьте первый аргумент. Микрофоны сейчас отключены.</p>
+            
+            {selectedTheme && (
+              <div className="flex flex-col items-center w-full max-w-4xl mb-8">
+                 {/* Визуал темы - выделенный блок с названием */}
+                 <div className="text-center mb-6 px-6 py-4 bg-white/5 border border-white/10 rounded-2xl w-full shadow-inner">
+                    <span className="text-xs text-slate-400 uppercase tracking-widest block mb-2">Текущая тема:</span>
+                    <h3 className="text-xl md:text-2xl font-bold text-white">{selectedTheme.title}</h3>
+                 </div>
+                 
+                 <div className="flex flex-col md:flex-row gap-6 w-full text-left">
+                    {/* Тезисы Команды А */}
+                    <div className="flex-1 bg-cyan-950/20 border border-cyan-500/30 p-4 rounded-xl">
+                      <h4 className="text-cyan-400 font-bold mb-3 border-b border-cyan-500/30 pb-2">Шпаргалка Команды А (ЗА):</h4>
+                      <ul className="list-disc list-inside text-sm text-cyan-50 space-y-3">
+                        {selectedTheme.pro.map((point, i) => <li key={i}>{point}</li>)}
+                      </ul>
+                    </div>
+                    
+                    {/* Тезисы Команды Б */}
+                    <div className="flex-1 bg-fuchsia-950/20 border border-fuchsia-500/30 p-4 rounded-xl">
+                      <h4 className="text-fuchsia-400 font-bold mb-3 border-b border-fuchsia-500/30 pb-2">Шпаргалка Команды Б (ПРОТИВ):</h4>
+                      <ul className="list-disc list-inside text-sm text-fuchsia-50 space-y-3">
+                        {selectedTheme.con.map((point, i) => <li key={i}>{point}</li>)}
+                      </ul>
+                    </div>
+                 </div>
+              </div>
+            )}
+
             <button onClick={skipPrep} className="px-8 py-3 border border-white/20 text-white/50 rounded-full hover:text-white hover:border-white transition-all">
                К дебатам (Команды готовы) ➔
             </button>
           </div>
         )}
 
+        {/* ФАЗА: ДЕБАТЫ */}
         {phase === 'DEBATE' && (
           <div className="w-full flex flex-col items-center">
-            <h2 className="text-xs font-bold text-slate-500 mb-4 uppercase tracking-[0.3em]">Открытый микрофон: {selectedTheme}</h2>
+            <h2 className="text-xs font-bold text-slate-500 mb-4 uppercase tracking-[0.3em]">Открытый микрофон: {selectedTheme?.title}</h2>
             {lastTranscript && (
               <div className="mb-4 p-3 bg-cyan-500/10 border border-cyan-500/20 rounded-2xl max-w-2xl text-center">
                 <span className="text-[10px] text-cyan-400 uppercase font-black tracking-widest block mb-1">Услышано:</span>
@@ -326,6 +386,7 @@ export default function DebateArena() {
         )}
       </div>
 
+      {/* КНОПКИ УПРАВЛЕНИЯ */}
       <div className={`w-full max-w-5xl flex flex-col sm:flex-row gap-4 md:gap-8 mb-2 transition-all ${phase === 'DEBATE' ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-20 filter grayscale'}`}>
           <PushToTalkButton teamName="Команда А (ГОВОРИТЬ)" colorClass="bg-cyan-600" onResponse={handleServerResponse} socketRef={pageSocketRef} />
           <PushToTalkButton teamName="Команда Б (ГОВОРИТЬ)" colorClass="bg-fuchsia-600" onResponse={handleServerResponse} socketRef={pageSocketRef} />
